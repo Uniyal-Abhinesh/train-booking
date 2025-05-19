@@ -1,0 +1,87 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+    <title>Train Booking Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        .form-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            width: 320px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .logout-link {
+            margin-top: 15px;
+            display: inline-block;
+            text-decoration: none;
+            color: #007bff;
+        }
+        .logout-link:hover {
+            text-decoration: underline;
+        }
+        .welcome {
+            margin-bottom: 20px;
+            font-weight: bold;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <h1>Train Booking Dashboard</h1>
+    <p class="welcome">Welcome, {{ username }}!</p>
+
+    <div class="form-container">
+        <form action="{{ url_for('book_ticket') }}" method="POST">
+            <!-- Hidden input to pass username -->
+            <input type="hidden" name="username" value="{{ username }}">
+
+            <label for="name">Passenger Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="source">Source Station:</label>
+            <input type="text" id="source" name="source" required>
+
+            <label for="destination">Destination Station:</label>
+            <input type="text" id="destination" name="destination" required>
+
+            <label for="train">Train Number:</label>
+            <input type="text" id="train" name="train" required>
+
+            <label for="date">Date of Journey:</label>
+            <input type="date" id="date" name="date" required>
+
+            <button type="submit">Book Ticket</button>
+        </form>
+    </div>
+
+    <a class="logout-link" href="{{ url_for('logout') }}">Logout</a>
+</body>
+</html>
